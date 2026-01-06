@@ -34,7 +34,7 @@ export default function App() {
         Delete item
       </button>
 
-      <ConfirmContainer />
+      <ConfirmContainer animation='flip'/>
     </div>
   )
 }
