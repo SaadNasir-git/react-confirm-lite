@@ -1,0 +1,16 @@
+.app {
+  padding: 40px;
+  font-family: system-ui, sans-serif;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+button.danger {
+  background: #e5484d;
+  color: white;
+}
