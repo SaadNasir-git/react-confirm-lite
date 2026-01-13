@@ -54,16 +54,13 @@ export default function App() {
     <div className="app">
       <h1>react-confirm-lite</h1>
       <p>Example usage</p>
-      <div style={{height:'200vh'}}>
-
-      </div>
       <button className="danger" onClick={handleDelete}>
         Delete item
       </button>
-      {/* {themes.map((theme) => (
+      {themes.map((theme) => (
         <ThemePreview theme={theme} key={theme}/>
       ))}
-      <ConfirmContainer id='1'/> */}
+      <ConfirmContainer id='1'/>
     </div>
   )
 }

@@ -96,10 +96,11 @@ export function emit() {
 }
 
 const EventListener = (e: PointerEvent) => {
+  console.log('running...')
   if (containers.length === 0) {
     containers = document.querySelectorAll('.null-confirm-container');
   }
-  if (containers.length === 0 || containers.length === 1) return;
+  if (containers.length === 0) return;
 
   let parentElement = e.view?.document.activeElement?.parentElement;
   let container = parentElement?.querySelector('.null-confirm-container');
