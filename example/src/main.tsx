@@ -4,6 +4,6 @@ import { ConfirmContainer } from '../../dist/index'
 createRoot(document.getElementById('root')!).render(
   <>
     <App />
-    <ConfirmContainer/>
+    {/* <ConfirmContainer/> */}
   </>,
 )

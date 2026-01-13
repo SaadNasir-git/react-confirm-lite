@@ -60,10 +60,10 @@ export default function App() {
       <button className="danger" onClick={handleDelete}>
         Delete item
       </button>
-      {themes.map((theme) => (
+      {/* {themes.map((theme) => (
         <ThemePreview theme={theme} key={theme}/>
       ))}
-      <ConfirmContainer id='1'/>
+      <ConfirmContainer id='1'/> */}
     </div>
   )
 }

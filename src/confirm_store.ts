@@ -6,7 +6,7 @@ let containerId: string = '';
 let confirms: ConfirmOptions[] = [];
 let listeners = new Set<Listener>();
 let isActiveContainer: boolean = false
-const containers: NodeListOf<Element>[] = [];
+let containers: NodeListOf<Element> = document.querySelectorAll('.null-confirm-container');
 
 // Global lock - only ONE container can show alerts at a time
 let activeContainerId: string | null = null;
@@ -97,9 +97,9 @@ export function emit() {
 
 const EventListener = (e: PointerEvent) => {
   if (containers.length === 0) {
-    containers.push(document.querySelectorAll('.null-confirm-container'));
+    containers = document.querySelectorAll('.null-confirm-container');
   }
-  if (containers.length === 0) return;
+  if (containers.length === 0 || containers.length === 1) return;
 
   let parentElement = e.view?.document.activeElement?.parentElement;
   let container = parentElement?.querySelector('.null-confirm-container');
@@ -126,10 +126,9 @@ export async function getElement() {
     }, 0);
   })
   if (containerId === '') {
-    if (containers.length === 0) {
-      containers.push(document.querySelectorAll('.null-confirm-container'));
-    }
-    return containers[0][0].id
+    if (containers.length === 0) return;
+    containerId = containers[0].id
+    return containerId
   }
   return containerId;
 }
@@ -139,54 +138,54 @@ class ScrollLockManager {
   private static instance: ScrollLockManager;
   private scrollPosition = 0;
   private isLocked = false;
-  
-  private constructor() {}
-  
+
+  private constructor() { }
+
   static getInstance(): ScrollLockManager {
     if (!ScrollLockManager.instance) {
       ScrollLockManager.instance = new ScrollLockManager();
     }
     return ScrollLockManager.instance;
   }
-  
+
   lock() {
     if (this.isLocked) return;
-    
+
     // Save current scroll position
     this.scrollPosition = window.scrollY;
-    
+
     // Get scrollbar width BEFORE hiding it
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    
+
     // Add padding to body BEFORE hiding scrollbar (prevents layout shift)
     document.body.style.paddingRight = `${scrollbarWidth}px`;
-    
+
     // Lock scroll on both html and body
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    
+
     // Add class for any additional CSS
     document.body.classList.add('scroll-locked');
-    
+
     this.isLocked = true;
   }
-  
+
   unlock() {
     if (!this.isLocked) return;
-    
+
     // Remove overflow hidden
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
-    
+
     // Remove padding
     document.body.style.paddingRight = '';
-    
+
     // Remove class
     document.body.classList.remove('scroll-locked');
-    
+
     // Restore scroll position AFTER styles are removed
     window.scrollTo(0, this.scrollPosition);
-    
+
     this.isLocked = false;
   }
 }

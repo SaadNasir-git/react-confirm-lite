@@ -1,6 +1,6 @@
 {
   "name": "react-confirm-lite",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A lightweight, promise-based confirm dialog for React, designed to be as easy to use as react-toastify, while remaining fully customizable.",
   "type": "module",
   "main": "./dist/index.js",
