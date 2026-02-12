@@ -1,0 +1,257 @@
+/* confirm.css */
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: overlayFadeIn 0.3s ease-out forwards;
+}
+
+.alert-overlay-exit {
+  animation: overlayFadeOut 0.3s ease-in forwards;
+}
+
+.alert-wrapper {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transform: translateY(20px) scale(0.98);
+}
+
+.alert-wrapper-exit {
+  animation: modalSlideDown 0.3s ease-in forwards;
+}
+
+.alert-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 12px 0;
+}
+
+.alert-message {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.alert-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.alert-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  text-align: center;
+}
+
+.alert-button:focus {
+  outline-offset: 2px;
+}
+
+.alert-button:active {
+  transform: translateY(1px);
+}
+
+/* Default animations */
+.alert-wrapper-exit {
+  animation: modalSlideDown 0.3s ease-in forwards;
+}
+
+/* Entrance Animation Classes */
+.alert-animate-fadeInScale {
+  animation: fadeInScale 0.4s ease-out forwards;
+}
+
+.alert-animate-bounceIn {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.alert-animate-flipIn {
+  animation: flipIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.alert-animate-zoomIn {
+  animation: zoomIn 0.3s ease-out forwards;
+}
+
+.alert-animate-rotateIn {
+  animation: rotateIn 0.5s ease-out forwards;
+}
+
+.alert-animate-fadeInUp {
+  animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.alert-animate-dropIn {
+  animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.alert-animate-slideInRight {
+  animation: slideInRight 0.4s ease-out forwards;
+}
+
+.alert-animate-slideInLeft {
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+
+.alert-animate-fadeInDown {
+  animation: fadeInDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.alert-animate-slideDownIn {
+  animation: slideDownIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.alert-animate-rotateInRight {
+  animation: rotateInRight 0.5s ease-out forwards;
+}
+
+.alert-animate-zoomInSmall {
+  animation: zoomInSmall 0.3s ease-out forwards;
+}
+
+.alert-animate-bounceInSmall {
+  animation: bounceInSmall 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.alert-animate-fadeInBlur {
+  animation: fadeInBlur 0.4s ease-out forwards;
+}
+
+.alert-animate-fadeInShrink {
+  animation: fadeInShrink 0.3s ease-out forwards;
+}
+
+/* Exit Animation Classes */
+.alert-animate-fadeOutScale {
+  animation: fadeOutScale 0.3s ease-in forwards;
+}
+
+.alert-animate-bounceOut {
+  animation: bounceOut 0.4s ease-in forwards;
+}
+
+.alert-animate-zoomOut {
+  animation: zoomOut 0.3s ease-in forwards;
+}
+
+.alert-animate-rotateOut {
+  animation: rotateOut 0.3s ease-in forwards;
+}
+
+.alert-animate-fadeOutDown {
+  animation: fadeOutDown 0.3s ease-in forwards;
+}
+
+.alert-animate-slideOutRight {
+  animation: slideOutRight 0.3s ease-in forwards;
+}
+
+.alert-animate-slideOutLeft {
+  animation: slideOutLeft 0.3s ease-in forwards;
+}
+
+.alert-animate-flipOut {
+  animation: flipOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.alert-animate-dropOut {
+  animation: dropOut 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.alert-animate-fadeOutUp {
+  animation: fadeOutUp 0.3s ease-in forwards;
+}
+
+.alert-animate-slideUpOut {
+  animation: slideUpOut 0.3s ease-in forwards;
+}
+
+.alert-animate-rotateOutLeft {
+  animation: rotateOutLeft 0.3s ease-in forwards;
+}
+
+.alert-animate-zoomOutSmall {
+  animation: zoomOutSmall 0.3s ease-in forwards;
+}
+
+.alert-animate-bounceOutSmall {
+  animation: bounceOutSmall 0.4s ease-in forwards;
+}
+
+.alert-animate-fadeOutBlur {
+  animation: fadeOutBlur 0.4s ease-in forwards;
+}
+
+.alert-animate-fadeOutShrink {
+  animation: fadeOutShrink 0.3s ease-in forwards;
+}
+
+.alert-wrapper {
+  width: 90%;
+  max-width: 400px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.null-confirm-container{
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* Global CSS file */
+html.scroll-locked {
+  overflow: hidden !important;
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+html.scroll-locked body {
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+  padding-right: var(--scrollbar-width, 0px) !important;
+}
+
+/* Optional: Prevent momentum scrolling on iOS */
+html.scroll-locked {
+  -webkit-overflow-scrolling: auto !important;
+}

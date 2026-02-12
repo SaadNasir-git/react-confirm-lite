@@ -1,0 +1,49 @@
+{
+  "name": "react-confirm-lite",
+  "version": "1.5.5",
+  "description": "A lightweight, promise-based confirm dialog for React, designed to be as easy to use as react-toastify, while remaining fully customizable.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaadNasir-git/react-confirm-lite.git"
+  },
+  "homepage": "https://github.com/SaadNasir-git/react-confirm-lite#readme",
+  "scripts": {
+    "build": "tsup && cp LICENSE dist/",
+    "build:watch": "tsup --watch",
+    "clean": "rm -rf dist",
+    "postbuild": "echo \"'use client';\" | cat - dist/index.js > temp && mv temp dist/index.js",
+    "prepack": "npm run clean && npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT",
+  "author": "Saad Nasir",
+  "keywords": [
+    "react-confirm",
+    "react-confirm-lite",
+    "react confirm lite",
+    "react confirm",
+    "confirm"
+  ]
+}
