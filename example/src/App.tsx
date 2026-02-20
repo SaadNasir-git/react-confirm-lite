@@ -1,4 +1,4 @@
-import { confirm, ConfirmContainer, type ColorSchema } from 'react-confirm-lite'
+import { confirm, ConfirmContainer, type ColorSchema, type AnimationType } from 'react-confirm-lite'
 import './App.css'
 import { useState } from 'react'
 
@@ -61,6 +61,27 @@ export default function App() {
         <ThemePreview theme={theme} key={theme} />
       ))}
       <ConfirmContainer id='1' />
+      <Animations />
+    </div>
+  )
+}
+
+function Animations() {
+  const Animations: AnimationType[] = ['bounce', 'bounceSmall', 'drop', 'fadeBlur', 'fadeDown', 'fadeScale', 'fadeScale', 'fadeShrink', 'fadeUp', 'flip', 'rotate', 'rotateRight', 'slide', 'slideLeft', 'slideRight', 'zoom', 'zoomSmall']
+  return (
+    <div>
+      {
+        Animations.map((animation, index) => (
+          <div key={index}>
+            <button onClick={() => confirm('Are you sure?')}>
+              {animation}
+            </button>
+            <div>
+              <ConfirmContainer animation={animation} />
+            </div>
+          </div>
+        ))
+      }
     </div>
   )
 }

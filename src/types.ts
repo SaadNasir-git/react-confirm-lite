@@ -18,7 +18,6 @@ export type AnimationType =
   | 'slideRight'
   | 'slideLeft'
   | 'fadeDown'
-  | 'slideDown'
   | 'rotateRight'
   | 'zoomSmall'
   | 'bounceSmall'
