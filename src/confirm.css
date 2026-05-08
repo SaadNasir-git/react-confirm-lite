@@ -226,32 +226,10 @@
     0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-.null-confirm-container{
-  width: 0;
-  height: 0;
-  opacity: 0;
+body.scroll-locked {
+  /* top: calc((var(--scroll-position, 0) * -1) - 8px); */
+  top: calc(var(--scroll-position, 0) * -1);
   position: fixed;
-  left: 0;
-  top: 0;
-}
-
-/* Global CSS file */
-html.scroll-locked {
-  overflow: hidden !important;
-  position: relative !important;
-  height: 100% !important;
-  width: 100% !important;
-}
-
-html.scroll-locked body {
-  overflow: hidden !important;
-  height: 100% !important;
-  width: 100% !important;
-  position: relative !important;
-  padding-right: var(--scrollbar-width, 0px) !important;
-}
-
-/* Optional: Prevent momentum scrolling on iOS */
-html.scroll-locked {
-  -webkit-overflow-scrolling: auto !important;
+  width: 100%;
+  overflow-y: scroll;
 }

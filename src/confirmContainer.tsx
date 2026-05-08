@@ -1,10 +1,11 @@
+//confirmContainer.tsx
 import React, { useEffect, useState, useCallback, useRef, type ReactNode, type CSSProperties } from "react";
-import { subscribe, closeAlert, setActiveContainer, setIsContainerActive, getIsContainerActive, getActiveContainerId, makeId } from "./confirm_store";
+import { subscribe, closeAlert } from "./confirm_store";
 import type { ConfirmClasses, ConfirmOptions, ColorSchema, AnimationType, animationPairs } from "./types";
 import { lockBodyScroll, unlockBodyScroll } from "./confirm_store";
 import "./confirm.css";
-import './animations.css'
-import './colorSchemas.css'
+import './animations.css';
+import './colorSchemas.css';
 import { ensureStyles } from "./bundle-css";
 
 function cx(...classes: (string | undefined)[]) {
@@ -51,7 +52,6 @@ type Props = {
     animationClass: string;
     animationStyle: CSSProperties;
   }) => ReactNode;
-  id?: string;
 };
 
 const ConfirmContainer = ({
@@ -64,19 +64,23 @@ const ConfirmContainer = ({
   animationDurationIn,
   animationDurationOut,
   lockScroll = true,
-  children,
-  id
+  children
 }: Props) => {
+  // CONSOLIDATED STATES:
   const [alerts, setAlerts] = useState<ConfirmOptions[]>([]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentAlert, setCurrentAlert] = useState<ConfirmOptions | null>(null);
-  const [isExiting, setIsExiting] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [dialogState, setDialogState] = useState<{
+    alert: ConfirmOptions | null;
+    status: 'idle' | 'active' | 'exiting';
+  }>({ alert: null, status: 'idle' });
+
   const overlayRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const exitTimerRef = useRef<number | null>(null);
-  const containerId = useRef(id || `confirm-${makeId()}`)
-  const nullElement = <div id={containerId.current} className="null-confirm-container"></div>
+
+  // Derived variables so the rest of your component doesn't have to change
+  const isVisible = dialogState.status === 'active';
+  const isExiting = dialogState.status === 'exiting';
+  const currentAlert = dialogState.alert;
 
   useEffect(() => {
     subscribe((newAlerts) => {
@@ -85,111 +89,51 @@ const ConfirmContainer = ({
   }, []);
 
   useEffect(() => {
-    ensureStyles()
+    ensureStyles();
   }, []);
 
+  // Sync alerts queue with dialog status
   useEffect(() => {
-    if (alerts.length > 0 && !currentAlert && !isExiting) {
-      const nextAlert = alerts[0];
+    if (alerts.length > 0 && dialogState.status === 'idle') {
+      if (lockScroll) lockBodyScroll();
+      setDialogState({ alert: alerts[0], status: 'active' });
+    } 
+    else if (
+      dialogState.status === 'active' &&
+      (alerts.length === 0 || (currentAlert && alerts[0] !== currentAlert))
+    ) {
+      setDialogState((prev) => ({ ...prev, status: 'exiting' }));
 
-      // Check if we should show this alert
-      const shouldShowAlert =
-        !nextAlert.id ||
-        nextAlert.id === containerId.current ||
-        !getActiveContainerId();
-
-      if (shouldShowAlert) {
-        // Check if we can become active
-        const currentActive = getActiveContainerId();
-
-        if (!currentActive || currentActive === containerId.current) {
-          if (lockScroll) {
-            lockBodyScroll()
-          }
-          setActiveContainer(containerId.current);
-          setIsContainerActive(true);
-
-          // Show the alert
-          setIsMounted(true);
-          setCurrentAlert(nextAlert);
-          setIsVisible(true);
-        }
-      }
-    }
-    else if (alerts.length === 0 && currentAlert && isVisible) {
-      // No more alerts, but we're showing one - start exit
-      setIsExiting(true);
-      setIsVisible(false);
-
-      if (exitTimerRef.current) {
-        clearTimeout(exitTimerRef.current);
-      }
-
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
       const exitDuration = animationDurationOut || animationDuration;
-      exitTimerRef.current = setTimeout(() => {
-        setIsContainerActive(false);
-        setIsExiting(false);
-        setCurrentAlert(null);
-        setIsMounted(false);
+      
+      exitTimerRef.current = window.setTimeout(() => {
+        setDialogState({ alert: null, status: 'idle' });
       }, exitDuration);
     }
-    else if (alerts.length > 0 && currentAlert && alerts[0].id !== currentAlert.id) {
-      // New alert with different ID is replacing current one
-      setIsExiting(true);
-      setIsVisible(false);
+  }, [alerts, currentAlert, dialogState.status, animationDuration, animationDurationOut, lockScroll]);
 
-      if (exitTimerRef.current) {
-        clearTimeout(exitTimerRef.current);
-      }
-
-      const exitDuration = animationDurationOut || animationDuration;
-      exitTimerRef.current = setTimeout(() => {
-        setIsContainerActive(false);
-        setIsExiting(false);
-        setCurrentAlert(null);
-        setIsMounted(false);
-        // The new alert will be picked up in the next render
-      }, exitDuration);
-    }
-  }, [alerts, currentAlert, animationDuration, animationDurationOut, isVisible]);
-
-  const handleClose = useCallback(async (value: boolean | null) => {
+  const handleClose = useCallback((value: boolean | null) => {
     if (!currentAlert || isExiting) return;
 
-    // Start exit animation immediately
-    setIsExiting(true);
-    setIsVisible(false);
+    setDialogState((prev) => ({ ...prev, status: 'exiting' }));
 
-    // Delay the actual closeAlert call until animation completes
     const exitDuration = animationDurationOut || animationDuration;
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
 
-    if (exitTimerRef.current) {
-      clearTimeout(exitTimerRef.current);
-    }
-
-    exitTimerRef.current = setTimeout(() => {
-      // Now call closeAlert which will resolve the promise
+    exitTimerRef.current = window.setTimeout(() => {
       closeAlert(value);
-
-      // Reset state
-      setIsExiting(false);
-      setCurrentAlert(null);
-      setIsMounted(false);
-      setIsContainerActive(false);
-      unlockBodyScroll()
+      setDialogState({ alert: null, status: 'idle' });
+      unlockBodyScroll();
     }, exitDuration);
   }, [currentAlert, isExiting, animationDuration, animationDurationOut]);
 
   const handleCancel = useCallback(() => {
-    if (currentAlert && isVisible && !isExiting) {
-      handleClose(false);
-    }
+    if (currentAlert && isVisible && !isExiting) handleClose(false);
   }, [currentAlert, isVisible, isExiting, handleClose]);
 
   const handleOk = useCallback(() => {
-    if (currentAlert && isVisible && !isExiting) {
-      handleClose(true);
-    }
+    if (currentAlert && isVisible && !isExiting) handleClose(true);
   }, [currentAlert, isVisible, isExiting, handleClose]);
 
   const handleEscKey = useCallback((event: KeyboardEvent) => {
@@ -204,7 +148,6 @@ const ConfirmContainer = ({
     if (currentAlert && isVisible && !isExiting) {
       window.addEventListener('keydown', handleEscKey, { capture: true });
     }
-
     return () => {
       window.removeEventListener('keydown', handleEscKey, { capture: true });
     };
@@ -212,12 +155,14 @@ const ConfirmContainer = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current &&
+      if (
+        wrapperRef.current &&
         !wrapperRef.current.contains(event.target as Node) &&
         closeOnClickOutside &&
         currentAlert &&
         isVisible &&
-        !isExiting) {
+        !isExiting
+      ) {
         handleClose(null);
       }
     };
@@ -225,22 +170,15 @@ const ConfirmContainer = ({
     if (currentAlert && isVisible && !isExiting) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [closeOnClickOutside, currentAlert, isVisible, isExiting, handleClose]);
 
-  // Replace the render conditions with:
-  if (!isMounted && !isExiting) {
-    return nullElement;
+  if (dialogState.status === 'idle' || !currentAlert) {
+    return null;
   }
 
-  if (!currentAlert || !getIsContainerActive()) {
-    return nullElement;
-  }
-
-  // Always render if we have a current alert
   const colorSchema = currentAlert?.colorSchema || defaultColorSchema;
   const schemaClass = `schema-${colorSchema}`;
 
@@ -253,32 +191,24 @@ const ConfirmContainer = ({
   animationStyle.animationFillMode = 'forwards';
 
   const animationClass = isVisible
-    ? animationPairs[animation as keyof animationPairs].enter
-    : animationPairs[animation as keyof animationPairs].exit;
+    ? animationPairs[animation as keyof typeof animationPairs].enter
+    : animationPairs[animation as keyof typeof animationPairs].exit;
 
-
-  // For children render
-  if (children && currentAlert && getActiveContainerId() === containerId.current) {
-    return (
-      <>
-        {nullElement}
-        {children({
-          isVisible: isVisible && !isExiting,
-          confirm: currentAlert,
-          handleCancel,
-          handleOk,
-          containerRef: wrapperRef,
-          colorSchema,
-          animationClass,
-          animationStyle
-        })}
-      </>
-    )
+  if (children && currentAlert) {
+    return children({
+      isVisible: isVisible && !isExiting,
+      confirm: currentAlert,
+      handleCancel,
+      handleOk,
+      containerRef: wrapperRef,
+      colorSchema,
+      animationClass,
+      animationStyle
+    });
   }
 
   return (
     <>
-      {nullElement}
       <div
         ref={overlayRef}
         className={cx(

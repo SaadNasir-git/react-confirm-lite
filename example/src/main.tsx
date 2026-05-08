@@ -1,12 +1,10 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
-import { showClosest } from '../../dist/index'
-
-showClosest()
+import { ConfirmContainer } from 'react-confirm-manager';
 
 createRoot(document.getElementById('root')!).render(
   <>
     <App />
-    {/* <ConfirmContainer/> */}
+    <ConfirmContainer animation='rotateRight'/>
   </>,
 )

@@ -17,13 +17,18 @@
 
 ## 📦 Installation
 
+If you are using SSR
+
 ```bash
-npm install react-confirm-manager
-# or
-yarn add react-confirm-manager
-# or
-pnpm add react-confirm-manager
+npm install react-confirm-manager@2.0.0
 ```
+If you are not using SSR then
+```bash
+npm install react-confirm-manager@1.0.0
+# or
+npm install react-confirm-manager@2.0.0
+```
+
 
 ## 🚀 Quick Start
 
@@ -53,7 +58,7 @@ function App() {
 }
 ```
 
-### Important 
+### Important for v1
 By default it shows the first rendered component.
 But, if you want to show a specific container by confirm api no matters where it is then you can pass the id like this
 ```jsx
@@ -74,4 +79,8 @@ or if you want that everytime it show the closest without passing true in api th
 import { showClosest } from 'react-confirm-manager'
 showClosest()
 ```
-For more info checkout [website]().
+
+### Important for v2
+If you're using v2, then closest feature will not work you should have only one `<ConfirmContainer/>` in the root file otherwise it can create problem.
+
+For more info checkout the homepage

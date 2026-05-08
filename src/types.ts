@@ -35,7 +35,6 @@ export type ConfirmClasses = {
 };
 
 export type ConfirmInput = {
-  id?: string;
   title?: string;
   message: string;
   colorSchema?: ColorSchema;
@@ -44,7 +43,6 @@ export type ConfirmInput = {
 };
 
 export type ConfirmOptions = {
-  id?: string;
   title: string;
   message: string;
   resolve: (value: boolean | null) => void;

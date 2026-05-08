@@ -1,6 +1,6 @@
 {
   "name": "react-confirm-manager",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "An async, container-scoped confirmation manager for React with fully customizable dialogs.",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "type": "git",
     "url": "https://github.com/SaadNasir-git/react-confirm-manager.git"
   },
-  "homepage": "https:/SaadNasir-git/react-confirm-manager.github.io",
+  "homepage": "https://saadnasir-git.github.io/react-confirm-manager-docs",
   "scripts": {
     "build": "tsup && cp LICENSE dist/",
     "build:watch": "tsup --watch",
