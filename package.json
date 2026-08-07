@@ -1,6 +1,6 @@
 {
-  "name": "react-confirm-manager",
-  "version": "2.0.1",
+  "name": "react-confirm-lite",
+  "version": "0.0.1",
   "description": "An async, container-scoped confirmation manager for React with fully customizable dialogs.",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,9 +17,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/SaadNasir-git/react-confirm-manager.git"
+    "url": "https://github.com/SaadNasir-git/react-confirm-lite.git"
   },
-  "homepage": "https://saadnasir-git.github.io/react-confirm-manager-docs",
+  "homepage": "https://saadnasir-git.github.io/react-confirm-lite-docs",
   "scripts": {
     "build": "tsup && cp LICENSE dist/",
     "build:watch": "tsup --watch",
@@ -41,8 +41,8 @@
   "author": "Saad Nasir",
   "keywords": [
     "react-confirm",
-    "react-confirm-manager",
-    "react confirm manager",
+    "react-confirm-lite",
+    "react confirm lite",
     "react confirm",
     "confirm"
   ]
