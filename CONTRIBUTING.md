@@ -1,6 +1,6 @@
-# Contributing to react-confirm-manager
+# Contributing to react-confirm-lite
 
-Thank you for contributing to **react-confirm-manager**.
+Thank you for contributing to **react-confirm-lite**.
 This project is a **library + example app** setup, so local development requires **two terminals running in parallel**.
 
 Direct pushes to `main` are blocked. All changes go through branches and pull requests.
@@ -18,7 +18,7 @@ Direct pushes to `main` are blocked. All changes go through branches and pull re
 ## Repository Structure
 
 ```text
-react-confirm-manager/
+react-confirm-lite/
 ├─ src/              # Library source code
 ├─ dist/             # Built output (generated)
 ├─ example/          # Vite example app

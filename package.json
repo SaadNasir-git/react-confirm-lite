@@ -1,7 +1,7 @@
 {
   "name": "react-confirm-lite",
   "version": "0.0.1",
-  "description": "An async, container-scoped confirmation manager for React with fully customizable dialogs.",
+  "description": "An async, container-scoped confirmation manager for React with fully customizable dialogs. Easy to use just like react-toastify.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +19,6 @@
     "type": "git",
     "url": "https://github.com/SaadNasir-git/react-confirm-lite.git"
   },
-  "homepage": "https://saadnasir-git.github.io/react-confirm-lite-docs",
   "scripts": {
     "build": "tsup && cp LICENSE dist/",
     "build:watch": "tsup --watch",

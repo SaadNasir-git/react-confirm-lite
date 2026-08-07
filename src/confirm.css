@@ -35,10 +35,6 @@
   transform: translateY(20px) scale(0.98);
 }
 
-.alert-wrapper-exit {
-  animation: modalSlideDown 0.3s ease-in forwards;
-}
-
 .alert-title {
   font-size: 18px;
   font-weight: 600;
@@ -81,6 +77,10 @@
 }
 
 /* Default animations */
+.alert-wrapper-enter {
+  animation: modalSlideUp 0.3s ease-in forwards;
+}
+
 .alert-wrapper-exit {
   animation: modalSlideDown 0.3s ease-in forwards;
 }

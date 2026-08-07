@@ -1,4 +1,3 @@
-//confirmContainer.tsx
 import React, { useEffect, useState, useCallback, useRef, type ReactNode, type CSSProperties } from "react";
 import { subscribe, closeAlert } from "./confirm_store";
 import type { ConfirmClasses, ConfirmOptions, ColorSchema, AnimationType, animationPairs } from "./types";
@@ -13,7 +12,7 @@ function cx(...classes: (string | undefined)[]) {
 }
 
 const animationPairs = {
-  slide: { enter: '', exit: 'alert-wrapper-exit' },
+  slide: { enter: 'alert-wrapper-enter', exit: 'alert-wrapper-exit' },
   fadeScale: { enter: 'alert-animate-fadeInScale', exit: 'alert-animate-fadeOutScale' },
   bounce: { enter: 'alert-animate-bounceIn', exit: 'alert-animate-bounceOut' },
   flip: { enter: 'alert-animate-flipIn', exit: 'alert-animate-flipOut' },
@@ -208,7 +207,6 @@ const ConfirmContainer = ({
   }
 
   return (
-    <>
       <div
         ref={overlayRef}
         className={cx(
@@ -271,7 +269,6 @@ const ConfirmContainer = ({
           </div>
         </div>
       </div>
-    </>
   );
 };
 

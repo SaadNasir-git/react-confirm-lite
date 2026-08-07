@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We pledge to make participation in **react-confirm-manager** a respectful, harassment-free experience for everyone, regardless of experience level, gender, gender identity, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
+We pledge to make participation in **react-confirm-lite** a respectful, harassment-free experience for everyone, regardless of experience level, gender, gender identity, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
 
 This project is focused on building a clean, minimal, and maintainable open‑source library. All interactions should support that goal.
 
