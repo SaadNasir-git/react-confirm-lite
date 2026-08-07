@@ -62,6 +62,7 @@ await confirm({message:"Are you sure?",title:"Confirm",cancelText:"No",okText:"Y
 ```
 
 ## Custom Dialog
+To make custom dialog pass children like this
 
 ```tsx
 import { confirm, ConfirmContainer } from "react-confirm-manager"
@@ -107,10 +108,7 @@ const CustomDialog = () => {
                         {/* Alert Modal - Uses Tailwind's dark mode classes */}
                         <div
                             ref={containerRef}
-                            className={`relative z-10 w-full max-w-md transform rounded-2xl p-6 shadow-2xl transition-all duration-300 ${animationClass} 
-                    bg-white dark:bg-gray-900 
-                    text-gray-900 dark:text-gray-100
-                    border dark:border-gray-800`}
+                            className={`relative z-10 w-full max-w-md transform rounded-2xl p-6 shadow-2xl transition-all duration-300 ${animationClass} bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border dark:border-gray-800`}
                             style={animationStyle}
                         >
                             {/* Title */}
@@ -128,21 +126,14 @@ const CustomDialog = () => {
                                 <button
                                     onClick={handleCancel}
                                     disabled={!isVisible}
-                                    className="rounded-lg px-4 py-2 font-medium transition-colors 
-                            text-gray-700 dark:text-gray-300 
-                            bg-gray-100 dark:bg-gray-800/50
-                            hover:bg-gray-200 dark:hover:bg-gray-800
-                            disabled:opacity-50"
+                                    className="rounded-lg px-4 py-2 font-medium transition-colors text-gray-700 dark:text-gray-300  bg-gray-100 dark:bg-gray-800/50 hover:bg-gray-200 dark:hover:bg-gray-800 disabled:opacity-50"
                                 >
                                     {confirm.cancelText || 'Cancel'}
                                 </button>
                                 <button
                                     onClick={handleOk}
                                     disabled={!isVisible}
-                                    className="rounded-lg px-4 py-2 font-medium text-white transition-colors 
-                            bg-blue-600 hover:bg-blue-700 
-                            dark:bg-blue-600 dark:hover:bg-blue-700
-                            disabled:opacity-50"
+                                    className="rounded-lg px-4 py-2 font-medium text-white transition-colors bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 disabled:opacity-50"
                                 >
                                     {confirm.okText || 'OK'}
                                 </button>
