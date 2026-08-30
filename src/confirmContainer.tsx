@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef, type ReactNode, type CSSProperties } from "react";
 import { subscribe, closeAlert } from "./confirm_store";
 import type { ConfirmClasses, ConfirmOptions, ColorSchema, AnimationType, animationPairs } from "./types";
-import { lockBodyScroll, unlockBodyScroll } from "./confirm_store";
+// import { lockBodyScroll, unlockBodyScroll } from "./confirm_store";
 import "./confirm.css";
 import './animations.css';
 import './colorSchemas.css';
@@ -94,7 +94,7 @@ const ConfirmContainer = ({
   // Sync alerts queue with dialog status
   useEffect(() => {
     if (alerts.length > 0 && dialogState.status === 'idle') {
-      if (lockScroll) lockBodyScroll();
+      // if (lockScroll) lockBodyScroll();
       setDialogState({ alert: alerts[0], status: 'active' });
     } 
     else if (
@@ -123,7 +123,7 @@ const ConfirmContainer = ({
     exitTimerRef.current = window.setTimeout(() => {
       closeAlert(value);
       setDialogState({ alert: null, status: 'idle' });
-      unlockBodyScroll();
+      // unlockBodyScroll();
     }, exitDuration);
   }, [currentAlert, isExiting, animationDuration, animationDurationOut]);
 

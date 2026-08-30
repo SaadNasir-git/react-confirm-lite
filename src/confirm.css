@@ -1,5 +1,6 @@
 /* confirm.css */
 .alert-overlay {
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -23,7 +24,7 @@
 }
 
 .alert-wrapper {
-  width: 90%;
+  width: 100%;
   max-width: 400px;
   border-radius: 12px;
   padding: 24px;
@@ -226,10 +227,14 @@
     0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-body.scroll-locked {
-  /* top: calc((var(--scroll-position, 0) * -1) - 8px); */
-  top: calc(var(--scroll-position, 0) * -1);
-  position: fixed;
-  width: 100%;
-  overflow-y: scroll;
+body{
+  background: black;
+}
+
+html{
+  scrollbar-gutter: stable;
+}
+
+body:has(.alert-overlay) {
+  overflow: clip;
 }

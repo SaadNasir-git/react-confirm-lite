@@ -9,13 +9,11 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ height: '20000px' }}>
-      <h1>React Confirm Manager</h1>
-      <p>Click the buttons below to see the confirm dialogs in action.</p>
-      <div className="button-container">
-        <button onClick={handleConfirm}>Show Confirm</button>
+    <div>
+      <button onClick={handleConfirm}>Show Confirm</button>
+      <div style={{height:"200px", width: "100%", backgroundColor:"grey"}}>
+
       </div>
-      <button onClick={handleConfirm} style={{ marginTop: '1000px' }}>Show Confirm</button>
     </div>
   )
 }

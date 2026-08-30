@@ -61,37 +61,37 @@ class ScrollLockManager {
     return ScrollLockManager.instance;
   }
 
-  lock() {
-    if (this.isLocked) return;
+  // lock() {
+  //   if (this.isLocked) return;
 
-    // 1. Calculate current scroll position
-    const scrollY = window.scrollY;
+  //   // 1. Calculate current scroll position
+  //   const scrollY = window.scrollY;
     
-    // 2. Set it as a CSS variable for the CSS 'top' property
-    document.body.style.setProperty('--scroll-position', `${scrollY}px`);
+  //   // 2. Set it as a CSS variable for the CSS 'top' property
+  //   document.body.style.setProperty('--scroll-position', `${scrollY}px`);
     
-    // 3. Add the locking class
-    document.body.classList.add('scroll-locked');
-    this.isLocked = true;
-  }
+  //   // 3. Add the locking class
+  //   document.body.classList.add('scroll-locked');
+  //   this.isLocked = true;
+  // }
 
-  unlock() {
-    if (!this.isLocked) return;
+  // unlock() {
+  //   if (!this.isLocked) return;
 
-    // 1. Get the locked scroll position
-    const scrollY = document.body.style.getPropertyValue('--scroll-position').replace('px', '');
+  //   // 1. Get the locked scroll position
+  //   const scrollY = document.body.style.getPropertyValue('--scroll-position').replace('px', '');
     
-    // 2. Remove the locking class
-    document.body.classList.remove('scroll-locked');
+  //   // 2. Remove the locking class
+  //   document.body.classList.remove('scroll-locked');
     
-    // 3. Restore scroll position
-    window.scrollTo(0, parseInt(scrollY || '0'));
+  //   // 3. Restore scroll position
+  //   window.scrollTo(0, parseInt(scrollY || '0'));
 
-    this.isLocked = false;
-  }
+  //   this.isLocked = false;
+  // }
 }
 
 
 // Export simple functions
-export const lockBodyScroll = () => ScrollLockManager.getInstance().lock();
-export const unlockBodyScroll = () => ScrollLockManager.getInstance().unlock();
+// export const lockBodyScroll = () => ScrollLockManager.getInstance().lock();
+// export const unlockBodyScroll = () => ScrollLockManager.getInstance().unlock();

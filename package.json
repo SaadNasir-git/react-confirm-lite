@@ -1,6 +1,6 @@
 {
   "name": "react-confirm-lite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An async, container-scoped confirmation manager for React with fully customizable dialogs. Easy to use just like react-toastify.",
   "type": "module",
   "main": "./dist/index.js",
